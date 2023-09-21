@@ -18,8 +18,8 @@ const Login = () => {
     setIsLoading(true);
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      const token = response?.user?.accessToken
-      Cookies.set('token', token, {expires: 1})
+      const token = response?.user?.accessToken;
+      Cookies.set('token', token, { expires: 1 });
       setIsLoading(false);
       navigate('/gallery');
     } catch ({ ...error }) {
@@ -31,30 +31,34 @@ const Login = () => {
   };
 
   return (
-    <div className='form-container'>
-      <h2>Welcome To Image Gallery🎉</h2>
-      <p>Login to continue</p>
-      <form onSubmit={handleLogin}>
-        <input
-          type='email'
-          placeholder='Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type='submit' disabled={isLoading}>
-          {isLoading ? 'Please wait...' : 'Login'}
-        </button>
-      </form>
+    <div className='container'>
+      <div className='form-container'>
+        <h2>Welcome To Image Gallery🎉</h2>
+        <p>Login to continue</p>
+        <form onSubmit={handleLogin}>
+          <input
+            type='email'
+            placeholder='Email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type='password'
+            placeholder='Password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type='submit' disabled={isLoading}>
+            {isLoading ? 'Please wait...' : 'Login'}
+          </button>
+        </form>
 
-      <div>
-        <p>Don't have an account?</p>
-        <Link to='/signup'>Sign Up</Link>
+        <div>
+          <p>Don't have an account?</p>
+          <p>
+            <Link to='/signup'>Sign Up</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

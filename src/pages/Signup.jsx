@@ -16,9 +16,13 @@ const SignUp = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await createUserWithEmailAndPassword(auth, email, password);
-      const token = response?.user?.accessToken
-      Cookies.set('token', token, {expires: 1})
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const token = response?.user?.accessToken;
+      Cookies.set('token', token, { expires: 1 });
       setIsLoading(false);
       navigate('/gallery');
     } catch ({ ...error }) {
@@ -31,30 +35,34 @@ const SignUp = () => {
 
   return (
     <>
-      <div className='form-container'>
-        <h2>Welcome To Image Gallery🎉</h2>
-        <p>Create an account to get started</p>
-        <form onSubmit={handleSignUp}>
-          <input
-            type='email'
-            placeholder='Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type='submit' disabled={isLoading}>
-            {isLoading ? 'Loading...' : 'Create account'}
-          </button>
-        </form>
+      <div className='container'>
+        <div className='form-container'>
+          <h2>Welcome To Image Gallery🎉</h2>
+          <p>Create an account to get started</p>
+          <form onSubmit={handleSignUp}>
+            <input
+              type='email'
+              placeholder='Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button type='submit' disabled={isLoading}>
+              {isLoading ? 'Loading...' : 'Create account'}
+            </button>
+          </form>
 
-        <div>
-          <p>Already have an account?</p>
-          <Link to='/login'>Login</Link>
+          <div>
+            <p>Already have an account?</p>
+            <p>
+              <Link to='/login'>Login</Link>
+            </p>
+          </div>
         </div>
       </div>
     </>

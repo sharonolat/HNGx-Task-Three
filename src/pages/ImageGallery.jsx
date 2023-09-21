@@ -101,8 +101,8 @@ const ImageGallery = () => {
 
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
-    const filteredImages = JSON.parse(Cookies.get('images')).filter((image) =>
-      image.tag.toLowerCase().includes(query)
+    const filteredImages = JSON.parse(sessionStorage.getItem('images')).filter(
+      (image) => image.tag.toLowerCase().includes(query)
     );
     setImages(filteredImages);
   };
@@ -119,47 +119,50 @@ const ImageGallery = () => {
 
   return (
     <>
-      <div className='logout-container'>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
-
-      <div className='header-container'>
-        <h1>Image Gallery</h1>
-        <p>Drag and drop images to reposition</p>
-      </div>
-
-      <div className='search-container'>
-        <div className='search'>
-          <input
-            type='text'
-            placeholder='Search images by tag'
-            onChange={handleSearch}
-          />
-          <img src={searchIcon} alt='search-icon' />
+      <div className='image-gallery-container'>
+        <div className='logout-container'>
+          <button onClick={handleLogout}>Logout</button>
         </div>
-      </div>
+        <div className='image-gallery-container'>
+          <div className='header-container'>
+            <h1>Image Gallery</h1>
+            <p>Drag and drop images to reposition</p>
+          </div>
 
-      <div className='image-gallery'>
-        {isLoading ? (
-          <Spinner message='Loading images, Please wait...' />
-        ) : (
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCenter}
-            onDragEnd={handleDragEnd}
-          >
-            <SortableContext items={images} strategy={rectSwappingStrategy}>
-              {images.map((image, index) => (
-                <SortableImageItem
-                  key={index}
-                  id={image.id}
-                  url={image.url}
-                  tag={image.tag}
-                />
-              ))}
-            </SortableContext>
-          </DndContext>
-        )}
+          <div className='search-container'>
+            <div className='search'>
+              <input
+                type='text'
+                placeholder='Search images by tag'
+                onChange={handleSearch}
+              />
+              <img src={searchIcon} alt='search-icon' />
+            </div>
+          </div>
+
+          <div className='image-gallery'>
+            {isLoading ? (
+              <Spinner message='Loading images, Please wait...' />
+            ) : (
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragEnd={handleDragEnd}
+              >
+                <SortableContext items={images} strategy={rectSwappingStrategy}>
+                  {images.map((image, index) => (
+                    <SortableImageItem
+                      key={index}
+                      id={image.id}
+                      url={image.url}
+                      tag={image.tag}
+                    />
+                  ))}
+                </SortableContext>
+              </DndContext>
+            )}
+          </div>
+        </div>
       </div>
     </>
   );

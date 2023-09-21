@@ -1,4 +1,3 @@
-import './App.css';
 import { initializeApp } from 'firebase/app';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';

@@ -1,0 +1,42 @@
+.image-box{
+  width: 300px;
+  height: 350px;
+  padding: 0;
+  position: relative;
+
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  p{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+    padding: 5px 10px;
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 500;
+    border-radius: 10px;
+  }
+}
+
+/* Set a higher z-index for the dragging item */
+.draggable-item.is-dragging {
+  z-index: 2; /* Ensure the dragging item is displayed above others */
+}
+
+/* Add a blur effect when an item is being dragged over the droppable element */
+.droppable-element.dragging-over {
+  filter: blur(4px); /* Adjust the blur amount as needed */
+}
+
+/* Add opacity to make the element slightly opaque when an item is being dragged over it */
+.droppable-element.dragging-over-opacity {
+  opacity: 0.7; /* Adjust the opacity value as needed */
+  transition: opacity 0.3s ease; /* Adjust the transition duration as needed */
+}
